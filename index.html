@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruit Arrangment</title>
+    <style>
+      body,
+      html {
+        background-color: aquamarine;
+      }
+      #container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        height: 50vh;
+      }
+      #one,
+      #two,
+      #three,
+      #four,
+      #five,
+      #six,
+      #seven,
+      #eight,
+      #nine {
+        background-color: white;
+        border: solid black 1px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+      }
+
+      #button {
+        margin-top: 1em;
+        display: flex;
+        justify-content: right;
+      }
+      button {
+        height: 3em;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <span id="container">
+      <div id="one" class="test">Mango</div>
+      <div id="two" class="test">Banana</div>
+      <div id="three" class="test">Passion</div>
+      <div id="four" class="test">Pineapple</div>
+      <div id="five" class="test">Apple</div>
+      <div id="six" class="test">Tangerine</div>
+      <div id="seven" class="test">Watermelon</div>
+      <div id="eight" class="test">Grape</div>
+      <div id="nine" class="test">Orange</div>
+    </span>
+    <span id="button">
+      <button onclick="randomize()">Randomize</button>
+      <button onclick="arrange()">Arrange</button>
+    </span>
+  </body>
+  <script>
+    // function randomize() {
+    //   var cont = document.getElementById("container");
+    //   var elementsArray = Array.prototype.slice.call(
+    //     cont.getElementsByClassName("test")
+    //   );
+    //   elementsArray.forEach(function (element) {
+    //     cont.removeChild(element);
+    //   });
+    //   rand(elementsArray);
+    //   elementsArray.forEach(function (element) {
+    //     cont.appendChild(element);
+    //   });
+    // }
+
+    // function rand(array) {
+    //   for (var i = array.length - 1; i > 0; i--) {
+    //     var j = Math.floor(Math.random() * (i + 1));
+    //     var temp = array[i];
+    //     array[i] = array[j];
+    //     array[j] = temp;
+    //   }
+    //   return array;
+    // }
+
+    //create a function that will shuffle the divs each time the button is clicked
+    function randomize() {
+      var cont = document.getElementById("container");
+      var elementsArray = Array.prototype.slice.call(
+        cont.getElementsByClassName("test")
+      );
+      elementsArray.forEach(function (element) {
+        cont.removeChild(element);
+      });
+      shuffle(elementsArray);
+      elementsArray.forEach(function (element) {
+        cont.appendChild(element);
+      });
+    }
+
+    function shuffle(array) {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+
+    function arrange() {
+      var elements = document.getElementsByTagName("div");
+      var array = [];
+      for (var i = 0; i < elements.length; i++) {
+        array.push(elements[i].innerHTML);
+      }
+      array.sort();
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = array[i];
+      }
+    }
+  </script>
+</html>

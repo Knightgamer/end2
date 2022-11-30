@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>end semester exam by Kinsi Ali</title>
+
+    <style>
+      body {
+        background-color: #59f4bf;
+      }
+      h1 {
+        text-align: left;
+        font-size: 20px;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        background-color: #59f4bf;
+        padding: 10px;
+        height: 400px;
+      }
+      .griditem {
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+      }
+      form {
+        margin-right: 0px;
+        margin-left: 1080px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Fruit Arranger</h1>
+    <div class="container">
+      <div id="one" class="griditem">Mango</div>
+      <div id="two" class="griditem">Banana</div>
+      <div id="three" class="griditem">Passion</div>
+      <div id="four" class="griditem">Pineapple</div>
+      <div id="five" class="griditem">Apple</div>
+      <div id="six" class="griditem">Tangerine</div>
+      <div id="seven" class="griditem">Watermelon</div>
+      <div id="eight" class="griditem">Grape</div>
+      <div id="nine" class="griditem">Orange</div>
+    </div>
+
+    <br /><br /><br /><br /><br /><br /><br />
+    <form>
+      <button onclick="randomize">Randomize</button>
+      <button onclick="sortGrid">Arrange</button>
+    </form>
+  </body>
+  <script>
+    function randomize() {
+      var container = document.getElementById("grid-container");
+      var elementsArray = Array.prototype.slice.call(
+        container.getElementsByClassName("grid-item")
+      );
+      elementsArray.forEach(function (element) {
+        container.removeChild(element);
+      });
+      shuffleArray(elementsArray);
+      elementsArray.forEach(function (element) {
+        container.appendChild(element);
+      });
+    }
+
+    function shuffleArray(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+      return array;
+    }
+
+    function arrange() {
+      var elements = document.getElementsByTagName("div");
+      var array = [];
+      for (var i = 0; i < elements.length; i++) {
+        array.push(elements[i].innerHTML);
+      }
+      array.sort();
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = array[i];
+      }
+    }
+  </script>
+</html>
